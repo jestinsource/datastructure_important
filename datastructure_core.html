@@ -9,6 +9,7 @@
             --primary: #3498db;
             --secondary: #2ecc71;
             --accent: #e74c3c;
+            --warning: #f39c12;
             --dark: #2c3e50;
             --light: #ecf0f1;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -39,6 +40,41 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tab:hover:not(.active) {
+            background: #f8f9fa;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
         }
         
         .module-grid {
@@ -257,6 +293,217 @@
             overflow-x: auto;
         }
         
+        .game-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .game-area {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .game-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .game-btn:hover {
+            background: #2980b9;
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        
+        .notes-section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .note-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .note-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .mcq-section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .mcq-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .mcq-filter {
+            background: #e9ecef;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .mcq-filter.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .sortable-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .sortable-item {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            cursor: grab;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+            user-select: none;
+        }
+        
+        .sortable-item:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+        }
+        
+        .sortable-item.correct {
+            background: var(--secondary);
+        }
+        
+        .sortable-item.incorrect {
+            background: var(--accent);
+        }
+        
+        .tree-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+        
+        .node-value {
+            background: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 10px;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .tree-children {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stack-container {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            border: 2px solid var(--dark);
+            border-top: none;
+            height: 300px;
+            width: 150px;
+            margin: 0 auto;
+            background: #f8f9fa;
+        }
+        
+        .stack-element {
+            background: var(--primary);
+            color: white;
+            width: 120px;
+            padding: 15px;
+            text-align: center;
+            margin: 2px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .queue-container {
+            display: flex;
+            align-items: center;
+            border: 2px solid var(--dark);
+            height: 100px;
+            width: 400px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            overflow-x: auto;
+        }
+        
+        .queue-element {
+            background: var(--primary);
+            color: white;
+            min-width: 60px;
+            padding: 15px 10px;
+            text-align: center;
+            margin: 2px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .game-instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #856404;
+        }
+        
+        .game-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
         footer {
             background: var(--dark);
             color: white;
@@ -273,56 +520,219 @@
             .container {
                 padding: 1rem;
             }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .queue-container {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Data Structures Learning Game</h1>
-        <p>Master data structures through interactive lessons and practice questions</p>
+        <p>Master data structures through interactive lessons, games, and practice questions</p>
     </header>
     
     <div class="container">
-        <div id="module-selection">
-            <h2>Select a Module to Learn</h2>
-            <div class="module-grid">
-                <div class="module-card" data-module="1">
-                    <h3><span>1</span> Basic Concepts of Data Structures</h3>
-                    <ul class="topic-list">
-                        <li>Data Abstraction</li>
-                        <li>Performance Analysis</li>
-                        <li>Arrays & Sparse Matrices</li>
-                        <li>Stacks & Queues</li>
-                        <li>Expression Evaluation</li>
-                    </ul>
+        <div class="nav-tabs">
+            <div class="tab active" data-tab="modules">Learning Modules</div>
+            <div class="tab" data-tab="games">Interactive Games</div>
+            <div class="tab" data-tab="questions">Exam Questions</div>
+            <div class="tab" data-tab="notes">Detailed Notes</div>
+        </div>
+        
+        <div id="modules-tab" class="tab-content active">
+            <div id="module-selection">
+                <h2>Select a Module to Learn</h2>
+                <div class="module-grid">
+                    <div class="module-card" data-module="1">
+                        <h3><span>1</span> Basic Concepts of Data Structures</h3>
+                        <ul class="topic-list">
+                            <li>Data Abstraction</li>
+                            <li>Performance Analysis</li>
+                            <li>Arrays & Sparse Matrices</li>
+                            <li>Stacks & Queues</li>
+                            <li>Expression Evaluation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="module-card" data-module="2">
+                        <h3><span>2</span> Linked List and Memory Management</h3>
+                        <ul class="topic-list">
+                            <li>Singly Linked Lists</li>
+                            <li>Doubly & Circular Linked Lists</li>
+                            <li>Stacks & Queues using Linked Lists</li>
+                            <li>Memory Allocation Schemes</li>
+                            <li>Garbage Collection</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="module-card" data-module="3">
+                        <h3><span>3</span> Trees and Graphs</h3>
+                        <ul class="topic-list">
+                            <li>Tree Representation</li>
+                            <li>Binary Trees & Traversals</li>
+                            <li>Binary Search Trees</li>
+                            <li>Binary Heaps & Priority Queues</li>
+                            <li>Graph Representation & DFS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="module-content" class="content-section">
+                <!-- Content will be dynamically loaded here -->
+            </div>
+        </div>
+        
+        <div id="games-tab" class="tab-content">
+            <h2>Interactive Learning Games</h2>
+            
+            <div class="game-container">
+                <h3 class="game-title">Data Structure Sorting Challenge</h3>
+                <div class="game-instructions">
+                    <strong>How to Play:</strong> Drag and drop the elements to sort them in ascending order. Click "Check Order" to verify your sorting.
                 </div>
                 
-                <div class="module-card" data-module="2">
-                    <h3><span>2</span> Linked List and Memory Management</h3>
-                    <ul class="topic-list">
-                        <li>Singly Linked Lists</li>
-                        <li>Doubly & Circular Linked Lists</li>
-                        <li>Stacks & Queues using Linked Lists</li>
-                        <li>Memory Allocation Schemes</li>
-                        <li>Garbage Collection</li>
-                    </ul>
+                <div class="game-area">
+                    <div id="sorting-game">
+                        <div class="sortable-list" id="sortable-list">
+                            <!-- Elements will be dynamically added here -->
+                        </div>
+                    </div>
+                    <div class="game-stats">
+                        <div>Score: <span id="sorting-score">0</span></div>
+                        <div>Time: <span id="sorting-time">60</span>s</div>
+                    </div>
+                    <div class="game-controls">
+                        <button class="game-btn" id="start-sorting">Start Game</button>
+                        <button class="game-btn" id="check-sorting">Check Order</button>
+                        <button class="game-btn" id="reset-sorting">Reset</button>
+                    </div>
+                    <div id="sorting-result" class="result"></div>
+                </div>
+            </div>
+            
+            <div class="game-container">
+                <h3 class="game-title">Binary Tree Builder</h3>
+                <div class="game-instructions">
+                    <strong>How to Play:</strong> Insert values to build a Binary Search Tree. The tree will automatically balance according to BST rules.
                 </div>
                 
-                <div class="module-card" data-module="3">
-                    <h3><span>3</span> Trees and Graphs</h3>
-                    <ul class="topic-list">
-                        <li>Tree Representation</li>
-                        <li>Binary Trees & Traversals</li>
-                        <li>Binary Search Trees</li>
-                        <li>Binary Heaps & Priority Queues</li>
-                        <li>Graph Representation & DFS</li>
-                    </ul>
+                <div class="game-area">
+                    <div id="tree-game">
+                        <div id="tree-visualization">
+                            <!-- Tree visualization will be dynamically generated -->
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <input type="number" id="tree-value" placeholder="Enter value">
+                        <button class="game-btn" id="insert-value">Insert</button>
+                        <button class="game-btn" id="clear-tree">Clear Tree</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-container">
+                <h3 class="game-title">Stack Operations Simulator</h3>
+                <div class="game-instructions">
+                    <strong>How to Play:</strong> Use Push to add elements to the stack and Pop to remove them. Try to remember the LIFO (Last In First Out) principle.
+                </div>
+                
+                <div class="game-area">
+                    <div id="stack-game">
+                        <div class="stack-container" id="stack-container">
+                            <!-- Stack elements will be dynamically added here -->
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <input type="number" id="stack-value" placeholder="Enter value">
+                        <button class="game-btn" id="push-stack">Push</button>
+                        <button class="game-btn" id="pop-stack">Pop</button>
+                        <button class="game-btn" id="clear-stack">Clear</button>
+                    </div>
+                    <div id="stack-result" class="result"></div>
+                </div>
+            </div>
+            
+            <div class="game-container">
+                <h3 class="game-title">Queue Operations Simulator</h3>
+                <div class="game-instructions">
+                    <strong>How to Play:</strong> Use Enqueue to add elements to the queue and Dequeue to remove them. Remember the FIFO (First In First Out) principle.
+                </div>
+                
+                <div class="game-area">
+                    <div id="queue-game">
+                        <div class="queue-container" id="queue-container">
+                            <!-- Queue elements will be dynamically added here -->
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <input type="number" id="queue-value" placeholder="Enter value">
+                        <button class="game-btn" id="enqueue">Enqueue</button>
+                        <button class="game-btn" id="dequeue">Dequeue</button>
+                        <button class="game-btn" id="clear-queue">Clear</button>
+                    </div>
+                    <div id="queue-result" class="result"></div>
                 </div>
             </div>
         </div>
         
-        <div id="module-content" class="content-section">
-            <!-- Content will be dynamically loaded here -->
+        <div id="questions-tab" class="tab-content">
+            <h2>Exam Questions with Answers</h2>
+            
+            <div class="mcq-section">
+                <h3>Multiple Choice Questions</h3>
+                
+                <div class="mcq-filters">
+                    <button class="mcq-filter active" data-mark="all">All Questions</button>
+                    <button class="mcq-filter" data-mark="1">1 Mark Questions</button>
+                    <button class="mcq-filter" data-mark="2">2 Mark Questions</button>
+                    <button class="mcq-filter" data-mark="3">3 Mark Questions</button>
+                    <button class="mcq-filter" data-mark="4">4 Mark Questions</button>
+                </div>
+                
+                <div id="mcq-container">
+                    <!-- MCQ questions will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <div id="notes-tab" class="tab-content">
+            <h2>Detailed Notes</h2>
+            
+            <div class="notes-section">
+                <h3>Module 1: Basic Concepts of Data Structures</h3>
+                
+                <div class="note-item">
+                    <h4>Data Abstraction</h4>
+                    <p>Data abstraction is the process of hiding the implementation details and showing only the functionality to the user. In data structures, this means defining ADTs (Abstract Data Types) that specify operations without revealing how they're implemented.</p>
+                    <div class="code-block">
+                        // Example: Stack ADT<br>
+                        push(element) - Adds an element to the top<br>
+                        pop() - Removes and returns the top element<br>
+                        peek() - Returns the top element without removing it<br>
+                        isEmpty() - Checks if stack is empty
+                    </div>
+                </div>
+                
+                <div class="note-item">
+                    <h4>Performance Analysis</h4>
+                    <p>Performance analysis involves evaluating the efficiency of algorithms in terms of time and space complexity. We use Big O notation to describe how an algorithm's runtime or memory usage grows as input size increases.</p>
+                    <ul>
+                        <li><strong>O(1)</strong> - Constant time (e.g., accessing array element by index)</li>
+                        <li><strong>O(n)</strong> - Linear time (e.g., linear search)</li>
+                        <li><strong>O(n²)</strong> - Quadratic time (e.g., bubble sort)</li>
+                        <li><strong>O(log n)</strong> - Logarithmic time (e.g., binary search)</li>
+                    </ul>
+                </div>
+                
+                <!-- More notes would go here -->
+            </div>
         </div>
     </div>
     
@@ -476,6 +886,130 @@
             }
         };
 
+        // MCQ Questions data
+        const mcqQuestions = {
+            "1": [
+                {
+                    question: "Which data structure follows the FIFO principle?",
+                    options: ["Stack", "Queue", "Tree", "Graph"],
+                    answer: 1,
+                    explanation: "Queue follows FIFO (First In First Out) principle where the first element added is the first one to be removed."
+                },
+                {
+                    question: "What is the time complexity of inserting an element at the beginning of an array?",
+                    options: ["O(1)", "O(n)", "O(log n)", "O(n²)"],
+                    answer: 1,
+                    explanation: "Inserting at the beginning of an array requires shifting all existing elements, which takes O(n) time."
+                },
+                {
+                    question: "Which of the following is NOT a linear data structure?",
+                    options: ["Array", "Linked List", "Stack", "Tree"],
+                    answer: 3,
+                    explanation: "Tree is a hierarchical data structure, not a linear one like arrays, linked lists, and stacks."
+                }
+            ],
+            "2": [
+                {
+                    question: "Explain the difference between array and linked list with two points each.",
+                    options: [
+                        "Arrays have fixed size, Linked lists are dynamic; Arrays allow random access, Linked lists require sequential access",
+                        "Arrays are faster, Linked lists are slower; Arrays use more memory, Linked lists use less memory",
+                        "Arrays support binary search, Linked lists support linear search; Arrays are linear, Linked lists are hierarchical",
+                        "Arrays store homogeneous data, Linked lists store heterogeneous data; Arrays are in RAM, Linked lists are in cache"
+                    ],
+                    answer: 0,
+                    explanation: "Arrays have fixed size while linked lists can grow dynamically. Arrays allow direct access to any element (random access) while linked lists require traversing from the beginning (sequential access)."
+                },
+                {
+                    question: "What are the advantages of circular queue over linear queue?",
+                    options: [
+                        "Efficient memory utilization, No wastage of space",
+                        "Faster insertion and deletion, Better cache performance",
+                        "Supports random access, Allows binary search",
+                        "Automatic sorting, Built-in priority system"
+                    ],
+                    answer: 0,
+                    explanation: "Circular queues efficiently utilize memory by reusing the empty spaces created after dequeuing elements, unlike linear queues where space gets wasted."
+                },
+                {
+                    question: "What is the time complexity of searching in a balanced Binary Search Tree?",
+                    options: ["O(1)", "O(n)", "O(log n)", "O(n log n)"],
+                    answer: 2,
+                    explanation: "In a balanced BST, the height is O(log n), so search operations take O(log n) time."
+                }
+            ],
+            "3": [
+                {
+                    question: "Explain the process of converting infix expression to postfix expression using stack with example.",
+                    options: [
+                        "Scan expression left to right, push operators to stack based on precedence, pop to output when higher precedence operator is encountered",
+                        "Scan expression right to left, push operands to stack, pop when operator is found",
+                        "Convert to binary first, then rearrange operators",
+                        "Use two stacks - one for operators and one for operands"
+                    ],
+                    answer: 0,
+                    explanation: "The algorithm scans the infix expression from left to right. Operands go directly to output. Operators are pushed to stack based on precedence. When a higher precedence operator is encountered, lower precedence operators are popped from stack to output."
+                },
+                {
+                    question: "Differentiate between singly linked list and doubly linked list with advantages of each.",
+                    options: [
+                        "Singly: Less memory, One direction traversal; Doubly: More memory, Bidirectional traversal",
+                        "Singly: Faster insertion, Random access; Doubly: Slower deletion, Sequential access",
+                        "Singly: Fixed size, Static allocation; Doubly: Dynamic size, Heap allocation",
+                        "Singly: Supports sorting, Automatic garbage collection; Doubly: No sorting, Manual memory management"
+                    ],
+                    answer: 0,
+                    explanation: "Singly linked lists use less memory (one pointer per node) but only allow forward traversal. Doubly linked lists use more memory (two pointers per node) but allow both forward and backward traversal."
+                },
+                {
+                    question: "Explain the Depth First Search algorithm for graph traversal.",
+                    options: [
+                        "Uses stack, explores as far as possible along each branch before backtracking",
+                        "Uses queue, explores all neighbors at current depth before moving to next level",
+                        "Uses priority queue, explores nodes with highest priority first",
+                        "Uses hash table, explores nodes in random order"
+                    ],
+                    answer: 0,
+                    explanation: "DFS uses a stack (or recursion) to explore as far as possible along each branch before backtracking. It goes deep into the graph before exploring wide."
+                }
+            ],
+            "4": [
+                {
+                    question: "Explain Binary Search Tree operations (insertion, deletion, search) with time complexities.",
+                    options: [
+                        "Search: O(h), Insert: O(h), Delete: O(h) where h is height of tree",
+                        "Search: O(n), Insert: O(n), Delete: O(n) for all cases",
+                        "Search: O(1), Insert: O(log n), Delete: O(log n) for balanced trees",
+                        "Search: O(log n), Insert: O(n), Delete: O(n²) in worst case"
+                    ],
+                    answer: 0,
+                    explanation: "In BST, search, insertion and deletion all take O(h) time where h is the height of the tree. For balanced BST, h = O(log n), giving O(log n) time for these operations."
+                },
+                {
+                    question: "Compare and contrast BFS and DFS algorithms for graph traversal.",
+                    options: [
+                        "BFS: Uses queue, Level-order traversal; DFS: Uses stack, Explores depth first",
+                        "BFS: Recursive implementation; DFS: Iterative implementation",
+                        "BFS: Better for sparse graphs; DFS: Better for dense graphs",
+                        "BFS: Finds shortest path; DFS: Uses less memory"
+                    ],
+                    answer: 0,
+                    explanation: "BFS uses a queue and traverses level by level. DFS uses a stack (or recursion) and explores as far as possible along each branch before backtracking. BFS finds the shortest path in unweighted graphs, while DFS uses less memory for deep graphs."
+                },
+                {
+                    question: "Explain different memory allocation schemes (First-fit, Best-fit, Worst-fit) with examples.",
+                    options: [
+                        "First-fit: First adequate block; Best-fit: Smallest adequate block; Worst-fit: Largest adequate block",
+                        "First-fit: Random block; Best-fit: Exact size block; Worst-fit: Any available block",
+                        "First-fit: Largest block; Best-fit: First block; Worst-fit: Last block",
+                        "First-fit: Fastest; Best-fit: Most efficient; Worst-fit: Least fragmentation"
+                    ],
+                    answer: 0,
+                    explanation: "First-fit allocates the first adequate block found. Best-fit finds the smallest adequate block to minimize wasted space. Worst-fit finds the largest adequate block to leave large fragments for future allocations."
+                }
+            ]
+        };
+
         // Exam questions data
         const examQuestions = {
             1: [
@@ -538,6 +1072,34 @@
         const moduleSelection = document.getElementById('module-selection');
         const moduleContent = document.getElementById('module-content');
         const moduleCards = document.querySelectorAll('.module-card');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Event listeners for tabs
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tabId}-tab`) {
+                        content.classList.add('active');
+                    }
+                });
+                
+                // Load content for specific tabs
+                if (tabId === 'questions') {
+                    loadMCQQuestions('all');
+                } else if (tabId === 'games') {
+                    initializeGames();
+                }
+            });
+        });
 
         // Event listeners for module selection
         moduleCards.forEach(card => {
@@ -686,6 +1248,468 @@
             const progress = (correctAnswers / module.quiz.length) * 100;
             document.getElementById('progress-bar').style.width = `${progress}%`;
         }
+
+        // Function to load MCQ questions
+        function loadMCQQuestions(markFilter) {
+            const container = document.getElementById('mcq-container');
+            container.innerHTML = '';
+            
+            let questionsToShow = [];
+            
+            if (markFilter === 'all') {
+                // Show all questions from all mark categories
+                for (const mark in mcqQuestions) {
+                    questionsToShow = questionsToShow.concat(mcqQuestions[mark]);
+                }
+            } else {
+                // Show questions from specific mark category
+                questionsToShow = mcqQuestions[markFilter] || [];
+            }
+            
+            questionsToShow.forEach((q, index) => {
+                const questionHTML = `
+                    <div class="exam-question">
+                        <h4>Question ${index + 1} (${markFilter === 'all' ? 'Variable' : markFilter} mark${markFilter === '1' ? '' : 's'})</h4>
+                        <p>${q.question}</p>
+                        <div class="options" data-question="${index}">
+                `;
+                
+                q.options.forEach((option, optIndex) => {
+                    questionHTML += `
+                        <div class="option" data-option="${optIndex}">${String.fromCharCode(65 + optIndex)}. ${option}</div>
+                    `;
+                });
+                
+                questionHTML += `
+                        </div>
+                        <button class="submit-btn" onclick="checkMCQAnswer(${index}, ${q.answer}, '${markFilter}')">Check Answer</button>
+                        <div id="mcq-result-${index}" class="result" style="display: none;"></div>
+                    </div>
+                `;
+                
+                container.innerHTML += questionHTML;
+            });
+            
+            // Add event listeners to MCQ options
+            setTimeout(() => {
+                const options = document.querySelectorAll('#mcq-container .option');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        const questionIndex = this.parentElement.getAttribute('data-question');
+                        
+                        // Remove selected class from all options in this question
+                        const siblings = this.parentElement.querySelectorAll('.option');
+                        siblings.forEach(sibling => {
+                            sibling.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                    });
+                });
+            }, 100);
+        }
+
+        // Function to check MCQ answer
+        function checkMCQAnswer(questionIndex, correctAnswer, markFilter) {
+            const questionDiv = document.querySelectorAll('#mcq-container .exam-question')[questionIndex];
+            const selectedOption = questionDiv.querySelector('.option.selected');
+            const resultDiv = document.getElementById(`mcq-result-${questionIndex}`);
+            
+            if (!selectedOption) {
+                resultDiv.textContent = "Please select an answer first!";
+                resultDiv.className = 'result incorrect';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            const selectedIndex = parseInt(selectedOption.getAttribute('data-option'));
+            
+            // Find the question in the data
+            let questionData;
+            if (markFilter === 'all') {
+                // Search through all questions
+                for (const mark in mcqQuestions) {
+                    const found = mcqQuestions[mark].find((q, idx) => idx === questionIndex);
+                    if (found) {
+                        questionData = found;
+                        break;
+                    }
+                }
+            } else {
+                questionData = mcqQuestions[markFilter][questionIndex];
+            }
+            
+            if (selectedIndex === correctAnswer) {
+                resultDiv.textContent = "Correct! " + questionData.explanation;
+                resultDiv.className = 'result correct';
+                selectedOption.style.backgroundColor = '#d4edda';
+            } else {
+                resultDiv.textContent = "Incorrect. The correct answer is: " + questionData.explanation;
+                resultDiv.className = 'result incorrect';
+                selectedOption.style.backgroundColor = '#f8d7da';
+                
+                // Highlight correct answer
+                const correctOption = questionDiv.querySelector(`.option[data-option="${correctAnswer}"]`);
+                correctOption.style.backgroundColor = '#d4edda';
+            }
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // Function to initialize games
+        function initializeGames() {
+            // Sorting Challenge Game
+            const startSortingBtn = document.getElementById('start-sorting');
+            const checkSortingBtn = document.getElementById('check-sorting');
+            const resetSortingBtn = document.getElementById('reset-sorting');
+            const sortableList = document.getElementById('sortable-list');
+            const sortingScore = document.getElementById('sorting-score');
+            const sortingTime = document.getElementById('sorting-time');
+            const sortingResult = document.getElementById('sorting-result');
+            
+            let sortingScoreValue = 0;
+            let sortingTimeLeft = 60;
+            let sortingInterval;
+            let currentElements = [];
+            
+            startSortingBtn.addEventListener('click', startSortingGame);
+            checkSortingBtn.addEventListener('click', checkSortingOrder);
+            resetSortingBtn.addEventListener('click', resetSortingGame);
+            
+            function startSortingGame() {
+                sortingScoreValue = 0;
+                sortingTimeLeft = 60;
+                sortingScore.textContent = sortingScoreValue;
+                sortingTime.textContent = sortingTimeLeft;
+                sortingResult.style.display = 'none';
+                
+                // Generate random elements for sorting
+                sortableList.innerHTML = '';
+                currentElements = generateRandomArray(8, 1, 50);
+                
+                currentElements.forEach((element, index) => {
+                    const elementDiv = document.createElement('div');
+                    elementDiv.className = 'sortable-item';
+                    elementDiv.textContent = element;
+                    elementDiv.setAttribute('data-value', element);
+                    elementDiv.setAttribute('draggable', 'true');
+                    
+                    // Add drag events
+                    elementDiv.addEventListener('dragstart', handleDragStart);
+                    elementDiv.addEventListener('dragover', handleDragOver);
+                    elementDiv.addEventListener('drop', handleDrop);
+                    elementDiv.addEventListener('dragend', handleDragEnd);
+                    
+                    sortableList.appendChild(elementDiv);
+                });
+                
+                // Start timer
+                sortingInterval = setInterval(() => {
+                    sortingTimeLeft--;
+                    sortingTime.textContent = sortingTimeLeft;
+                    
+                    if (sortingTimeLeft <= 0) {
+                        clearInterval(sortingInterval);
+                        sortingResult.textContent = "Time's up! Game over.";
+                        sortingResult.className = 'result incorrect';
+                        sortingResult.style.display = 'block';
+                    }
+                }, 1000);
+            }
+            
+            function checkSortingOrder() {
+                const items = Array.from(sortableList.querySelectorAll('.sortable-item'));
+                const currentOrder = items.map(item => parseInt(item.getAttribute('data-value')));
+                const sortedOrder = [...currentOrder].sort((a, b) => a - b);
+                
+                const isCorrect = JSON.stringify(currentOrder) === JSON.stringify(sortedOrder);
+                
+                if (isCorrect) {
+                    sortingScoreValue += 50;
+                    sortingScore.textContent = sortingScoreValue;
+                    sortingResult.textContent = "Correct! The elements are sorted in ascending order.";
+                    sortingResult.className = 'result correct';
+                    
+                    // Mark all items as correct
+                    items.forEach(item => {
+                        item.classList.add('correct');
+                    });
+                    
+                    clearInterval(sortingInterval);
+                } else {
+                    sortingResult.textContent = "Incorrect order. Try again!";
+                    sortingResult.className = 'result incorrect';
+                }
+                
+                sortingResult.style.display = 'block';
+            }
+            
+            function resetSortingGame() {
+                clearInterval(sortingInterval);
+                sortableList.innerHTML = '';
+                sortingScoreValue = 0;
+                sortingTimeLeft = 60;
+                sortingScore.textContent = sortingScoreValue;
+                sortingTime.textContent = sortingTimeLeft;
+                sortingResult.style.display = 'none';
+            }
+            
+            // Drag and drop functions for sorting game
+            let draggedItem = null;
+            
+            function handleDragStart(e) {
+                draggedItem = this;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', this.innerHTML);
+                setTimeout(() => this.style.opacity = '0.4', 0);
+            }
+            
+            function handleDragOver(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                return false;
+            }
+            
+            function handleDrop(e) {
+                e.stopPropagation();
+                if (draggedItem !== this) {
+                    // Swap the elements
+                    const allItems = Array.from(sortableList.querySelectorAll('.sortable-item'));
+                    const draggedIndex = allItems.indexOf(draggedItem);
+                    const targetIndex = allItems.indexOf(this);
+                    
+                    if (draggedIndex < targetIndex) {
+                        sortableList.insertBefore(draggedItem, this.nextSibling);
+                    } else {
+                        sortableList.insertBefore(draggedItem, this);
+                    }
+                }
+                return false;
+            }
+            
+            function handleDragEnd(e) {
+                this.style.opacity = '1';
+            }
+            
+            // Binary Tree Builder Game
+            const insertValueBtn = document.getElementById('insert-value');
+            const clearTreeBtn = document.getElementById('clear-tree');
+            const treeValueInput = document.getElementById('tree-value');
+            const treeVisualization = document.getElementById('tree-visualization');
+            
+            let tree = null;
+            
+            insertValueBtn.addEventListener('click', insertValue);
+            clearTreeBtn.addEventListener('click', clearTree);
+            
+            function insertValue() {
+                const value = parseInt(treeValueInput.value);
+                if (isNaN(value)) {
+                    alert('Please enter a valid number');
+                    return;
+                }
+                
+                tree = insertIntoBST(tree, value);
+                visualizeTree(tree);
+                treeValueInput.value = '';
+            }
+            
+            function insertIntoBST(node, value) {
+                if (node === null) {
+                    return { value, left: null, right: null };
+                }
+                
+                if (value < node.value) {
+                    node.left = insertIntoBST(node.left, value);
+                } else if (value > node.value) {
+                    node.right = insertIntoBST(node.right, value);
+                }
+                
+                return node;
+            }
+            
+            function visualizeTree(node, container = treeVisualization) {
+                container.innerHTML = '';
+                
+                if (node === null) {
+                    container.innerHTML = '<p>Tree is empty. Insert values to build the tree.</p>';
+                    return;
+                }
+                
+                function buildTreeHTML(node) {
+                    if (node === null) return '';
+                    
+                    const leftHTML = buildTreeHTML(node.left);
+                    const rightHTML = buildTreeHTML(node.right);
+                    
+                    return `
+                        <div class="tree-node">
+                            <div class="node-value">${node.value}</div>
+                            <div class="tree-children">
+                                ${leftHTML}
+                                ${rightHTML}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                container.innerHTML = buildTreeHTML(node);
+            }
+            
+            function clearTree() {
+                tree = null;
+                visualizeTree(tree);
+            }
+            
+            // Stack Operations Simulator
+            const pushStackBtn = document.getElementById('push-stack');
+            const popStackBtn = document.getElementById('pop-stack');
+            const clearStackBtn = document.getElementById('clear-stack');
+            const stackValueInput = document.getElementById('stack-value');
+            const stackContainer = document.getElementById('stack-container');
+            const stackResult = document.getElementById('stack-result');
+            
+            let stack = [];
+            
+            pushStackBtn.addEventListener('click', pushStack);
+            popStackBtn.addEventListener('click', popStack);
+            clearStackBtn.addEventListener('click', clearStack);
+            
+            function pushStack() {
+                const value = stackValueInput.value;
+                if (value === '') {
+                    stackResult.textContent = "Please enter a value to push";
+                    stackResult.className = 'result incorrect';
+                    stackResult.style.display = 'block';
+                    return;
+                }
+                
+                stack.push(value);
+                updateStackVisualization();
+                stackValueInput.value = '';
+                stackResult.style.display = 'none';
+            }
+            
+            function popStack() {
+                if (stack.length === 0) {
+                    stackResult.textContent = "Stack is empty!";
+                    stackResult.className = 'result incorrect';
+                    stackResult.style.display = 'block';
+                    return;
+                }
+                
+                const poppedValue = stack.pop();
+                stackResult.textContent = `Popped value: ${poppedValue}`;
+                stackResult.className = 'result correct';
+                stackResult.style.display = 'block';
+                updateStackVisualization();
+            }
+            
+            function clearStack() {
+                stack = [];
+                updateStackVisualization();
+                stackResult.style.display = 'none';
+            }
+            
+            function updateStackVisualization() {
+                stackContainer.innerHTML = '';
+                stack.forEach(value => {
+                    const elementDiv = document.createElement('div');
+                    elementDiv.className = 'stack-element';
+                    elementDiv.textContent = value;
+                    stackContainer.appendChild(elementDiv);
+                });
+            }
+            
+            // Queue Operations Simulator
+            const enqueueBtn = document.getElementById('enqueue');
+            const dequeueBtn = document.getElementById('dequeue');
+            const clearQueueBtn = document.getElementById('clear-queue');
+            const queueValueInput = document.getElementById('queue-value');
+            const queueContainer = document.getElementById('queue-container');
+            const queueResult = document.getElementById('queue-result');
+            
+            let queue = [];
+            
+            enqueueBtn.addEventListener('click', enqueue);
+            dequeueBtn.addEventListener('click', dequeue);
+            clearQueueBtn.addEventListener('click', clearQueue);
+            
+            function enqueue() {
+                const value = queueValueInput.value;
+                if (value === '') {
+                    queueResult.textContent = "Please enter a value to enqueue";
+                    queueResult.className = 'result incorrect';
+                    queueResult.style.display = 'block';
+                    return;
+                }
+                
+                queue.push(value);
+                updateQueueVisualization();
+                queueValueInput.value = '';
+                queueResult.style.display = 'none';
+            }
+            
+            function dequeue() {
+                if (queue.length === 0) {
+                    queueResult.textContent = "Queue is empty!";
+                    queueResult.className = 'result incorrect';
+                    queueResult.style.display = 'block';
+                    return;
+                }
+                
+                const dequeuedValue = queue.shift();
+                queueResult.textContent = `Dequeued value: ${dequeuedValue}`;
+                queueResult.className = 'result correct';
+                queueResult.style.display = 'block';
+                updateQueueVisualization();
+            }
+            
+            function clearQueue() {
+                queue = [];
+                updateQueueVisualization();
+                queueResult.style.display = 'none';
+            }
+            
+            function updateQueueVisualization() {
+                queueContainer.innerHTML = '';
+                queue.forEach(value => {
+                    const elementDiv = document.createElement('div');
+                    elementDiv.className = 'queue-element';
+                    elementDiv.textContent = value;
+                    queueContainer.appendChild(elementDiv);
+                });
+            }
+            
+            // Helper function to generate random array
+            function generateRandomArray(size, min, max) {
+                const arr = [];
+                for (let i = 0; i < size; i++) {
+                    arr.push(Math.floor(Math.random() * (max - min + 1)) + min);
+                }
+                return arr;
+            }
+        }
+
+        // Event listeners for MCQ filters
+        document.querySelectorAll('.mcq-filter').forEach(filter => {
+            filter.addEventListener('click', function() {
+                // Update active filter
+                document.querySelectorAll('.mcq-filter').forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Load questions for selected filter
+                const markFilter = this.getAttribute('data-mark');
+                loadMCQQuestions(markFilter);
+            });
+        });
+
+        // Initialize the page
+        window.onload = function() {
+            // Load all MCQ questions by default
+            loadMCQQuestions('all');
+        };
     </script>
 </body>
 </html>
