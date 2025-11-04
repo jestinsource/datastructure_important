@@ -283,6 +283,32 @@
             margin-bottom: 1rem;
         }
         
+        .answer-btn {
+            background: var(--warning);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .answer-btn:hover {
+            background: #e67e22;
+        }
+        
+        .answer-content {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .answer-content.show {
+            display: block;
+        }
+        
         .code-block {
             background: #2d3748;
             color: #e2e8f0;
@@ -700,6 +726,14 @@
                     <!-- MCQ questions will be dynamically loaded here -->
                 </div>
             </div>
+            
+            <div class="exam-questions">
+                <h3>Important Exam Questions with Detailed Answers</h3>
+                
+                <div id="exam-questions-container">
+                    <!-- Exam questions will be dynamically loaded here -->
+                </div>
+            </div>
         </div>
         
         <div id="notes-tab" class="tab-content">
@@ -1010,60 +1044,767 @@
             ]
         };
 
-        // Exam questions data
+        // Exam questions data with detailed answers
         const examQuestions = {
             1: [
                 {
                     question: "Explain the concept of data abstraction with an example.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Data Abstraction</strong> is the process of hiding the implementation details and showing only the essential features of a data structure. It separates the "what" from the "how".</p>
+                        
+                        <p><strong>Key Points:</strong></p>
+                        <ul>
+                            <li>Hides complex implementation details</li>
+                            <li>Shows only essential operations</li>
+                            <li>Provides a clear interface</li>
+                            <li>Makes code more maintainable</li>
+                        </ul>
+                        
+                        <p><strong>Example:</strong> Stack ADT (Abstract Data Type)</p>
+                        <div class="code-block">
+                            // Interface (what we can do)<br>
+                            push(element) - Add element to top<br>
+                            pop() - Remove and return top element<br>
+                            peek() - View top element<br>
+                            isEmpty() - Check if stack is empty<br>
+                            <br>
+                            // Implementation details are hidden<br>
+                            // Could be implemented using array or linked list
+                        </div>
+                        
+                        <p>Users don't need to know if the stack uses an array or linked list internally. They only need to know the operations available.</p>
+                    `
                 },
                 {
                     question: "Compare and contrast arrays and linked lists.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Arrays vs Linked Lists:</strong></p>
+                        
+                        <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                            <tr style="background: #f8f9fa;">
+                                <th style="padding: 10px; border: 1px solid #ddd;">Aspect</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">Array</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">Linked List</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Memory Allocation</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Contiguous memory</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Non-contiguous memory</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Size</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Fixed size</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Dynamic size</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Access</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Random access (O(1))</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Sequential access (O(n))</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Insertion/Deletion</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Costly (O(n))</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Efficient (O(1)) at known position</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Memory Usage</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">No extra memory</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Extra memory for pointers</td>
+                            </tr>
+                        </table>
+                        
+                        <p><strong>When to use:</strong></p>
+                        <ul>
+                            <li><strong>Array:</strong> When random access is needed frequently, size is fixed</li>
+                            <li><strong>Linked List:</strong> When frequent insertions/deletions are needed, size is unknown</li>
+                        </ul>
+                    `
                 },
                 {
                     question: "Convert the infix expression (A + B) * C to postfix notation.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Step-by-step conversion:</strong></p>
+                        
+                        <p><strong>Infix:</strong> (A + B) * C</p>
+                        
+                        <p><strong>Conversion Process:</strong></p>
+                        <ol>
+                            <li>Scan expression from left to right</li>
+                            <li>Initialize empty stack for operators</li>
+                            <li>Output: A</li>
+                            <li>Push '(' to stack</li>
+                            <li>Output: A B</li>
+                            <li>Push '+' to stack</li>
+                            <li>Encounter ')', pop operators until '(': pop '+' → Output: A B +</li>
+                            <li>Pop '('</li>
+                            <li>Push '*' to stack</li>
+                            <li>Output: A B + C</li>
+                            <li>End of expression, pop remaining operators: pop '*' → Output: A B + C *</li>
+                        </ol>
+                        
+                        <p><strong>Postfix:</strong> A B + C *</p>
+                        
+                        <div class="code-block">
+                            // Algorithm for infix to postfix conversion:<br>
+                            1. Initialize empty stack<br>
+                            2. Scan infix expression left to right<br>
+                            3. If operand, add to output<br>
+                            4. If '(', push to stack<br>
+                            5. If ')', pop from stack to output until '('<br>
+                            6. If operator, pop operators with higher or equal precedence<br>
+                            7. Push current operator to stack<br>
+                            8. At end, pop all remaining operators
+                        </div>
+                    `
                 },
                 {
                     question: "Explain time and space complexity with examples.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Time Complexity:</strong> Measures how runtime grows with input size</p>
+                        <p><strong>Space Complexity:</strong> Measures how memory usage grows with input size</p>
+                        
+                        <p><strong>Common Time Complexities:</strong></p>
+                        <ul>
+                            <li><strong>O(1) - Constant:</strong> Accessing array element by index</li>
+                            <li><strong>O(log n) - Logarithmic:</strong> Binary search</li>
+                            <li><strong>O(n) - Linear:</strong> Linear search, traversing array</li>
+                            <li><strong>O(n log n) - Linearithmic:</strong> Merge sort, Quick sort</li>
+                            <li><strong>O(n²) - Quadratic:</strong> Bubble sort, Selection sort</li>
+                            <li><strong>O(2ⁿ) - Exponential:</strong> Tower of Hanoi</li>
+                        </ul>
+                        
+                        <p><strong>Examples:</strong></p>
+                        <div class="code-block">
+                            // O(1) - Constant time<br>
+                            int getFirstElement(int[] arr) {<br>
+                            &nbsp;&nbsp;return arr[0];<br>
+                            }<br>
+                            <br>
+                            // O(n) - Linear time<br>
+                            int findElement(int[] arr, int target) {<br>
+                            &nbsp;&nbsp;for(int i=0; i<arr.length; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;if(arr[i] == target) return i;<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;return -1;<br>
+                            }<br>
+                            <br>
+                            // O(n²) - Quadratic time<br>
+                            void bubbleSort(int[] arr) {<br>
+                            &nbsp;&nbsp;for(int i=0; i<arr.length; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;for(int j=0; j<arr.length-1; j++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(arr[j] > arr[j+1]) swap(arr, j, j+1);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <p><strong>Space Complexity Examples:</strong></p>
+                        <ul>
+                            <li><strong>O(1):</strong> Algorithms using fixed amount of extra space</li>
+                            <li><strong>O(n):</strong> Algorithms creating copy of input array</li>
+                            <li><strong>O(n²):</strong> Algorithms creating 2D array based on input size</li>
+                        </ul>
+                    `
                 }
             ],
             2: [
                 {
                     question: "Write an algorithm to reverse a singly linked list.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Algorithm to Reverse Singly Linked List:</strong></p>
+                        
+                        <div class="code-block">
+                            // Node structure<br>
+                            class Node {<br>
+                            &nbsp;&nbsp;int data;<br>
+                            &nbsp;&nbsp;Node next;<br>
+                            &nbsp;&nbsp;Node(int data) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.data = data;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.next = null;<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br>
+                            <br>
+                            // Iterative approach<br>
+                            Node reverseLinkedList(Node head) {<br>
+                            &nbsp;&nbsp;Node prev = null;<br>
+                            &nbsp;&nbsp;Node current = head;<br>
+                            &nbsp;&nbsp;Node next = null;<br>
+                            <br>
+                            &nbsp;&nbsp;while (current != null) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;next = current.next;  // Store next node<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;current.next = prev;  // Reverse current node's pointer<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;prev = current;       // Move prev to current<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;current = next;       // Move to next node<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;return prev;  // New head<br>
+                            }
+                        </div>
+                        
+                        <p><strong>Step-by-step explanation:</strong></p>
+                        <ol>
+                            <li>Initialize three pointers: prev = null, current = head, next = null</li>
+                            <li>Traverse through the list:</li>
+                            <ul>
+                                <li>Store the next node (next = current.next)</li>
+                                <li>Reverse the current node's pointer (current.next = prev)</li>
+                                <li>Move prev to current</li>
+                                <li>Move current to next</li>
+                            </ul>
+                            <li>When current becomes null, prev is the new head</li>
+                        </ol>
+                        
+                        <p><strong>Example:</strong></p>
+                        <p>Original: 1 → 2 → 3 → 4 → null</p>
+                        <p>Reversed: 4 → 3 → 2 → 1 → null</p>
+                        
+                        <p><strong>Time Complexity:</strong> O(n)</p>
+                        <p><strong>Space Complexity:</strong> O(1)</p>
+                    `
                 },
                 {
                     question: "Differentiate between first-fit, best-fit, and worst-fit memory allocation schemes.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Memory Allocation Schemes:</strong></p>
+                        
+                        <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                            <tr style="background: #f8f9fa;">
+                                <th style="padding: 10px; border: 1px solid #ddd;">Scheme</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">Description</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">Advantages</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">Disadvantages</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>First-fit</strong></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Allocates the first available block that is large enough</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Fastest, minimal searching</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">May create external fragmentation</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Best-fit</strong></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Allocates the smallest adequate block</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Minimizes wasted space</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Slow, may create small unusable fragments</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Worst-fit</strong></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Allocates the largest available block</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Reduces small fragments</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Slow, may not leave large enough blocks</td>
+                            </tr>
+                        </table>
+                        
+                        <p><strong>Example:</strong></p>
+                        <p>Memory blocks: [10KB, 30KB, 20KB, 15KB]</p>
+                        <p>Request: 12KB</p>
+                        <ul>
+                            <li><strong>First-fit:</strong> Allocate 30KB block (first adequate)</li>
+                            <li><strong>Best-fit:</strong> Allocate 15KB block (smallest adequate)</li>
+                            <li><strong>Worst-fit:</strong> Allocate 30KB block (largest available)</li>
+                        </ul>
+                        
+                        <p><strong>Performance Comparison:</strong></p>
+                        <ul>
+                            <li><strong>Speed:</strong> First-fit > Best-fit ≈ Worst-fit</li>
+                            <li><strong>Memory Utilization:</strong> Best-fit > First-fit > Worst-fit</li>
+                            <li><strong>Fragmentation:</strong> Best-fit creates smallest fragments</li>
+                        </ul>
+                    `
                 },
                 {
                     question: "Explain garbage collection and compaction in memory management.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Garbage Collection:</strong></p>
+                        <p>Automatic memory management technique that reclaims memory occupied by objects that are no longer in use by the program.</p>
+                        
+                        <p><strong>How it works:</strong></p>
+                        <ol>
+                            <li><strong>Mark:</strong> Identify which objects are still in use</li>
+                            <li><strong>Sweep:</strong> Reclaim memory from unused objects</li>
+                        </ol>
+                        
+                        <p><strong>Types of Garbage Collectors:</strong></p>
+                        <ul>
+                            <li><strong>Reference Counting:</strong> Counts references to each object</li>
+                            <li><strong>Mark and Sweep:</strong> Marks reachable objects, sweeps unreachable ones</li>
+                            <li><strong>Generational:</strong> Divides objects by age for efficient collection</li>
+                        </ul>
+                        
+                        <p><strong>Memory Compaction:</strong></p>
+                        <p>Process of moving allocated objects together to eliminate fragmentation and create larger contiguous free blocks.</p>
+                        
+                        <p><strong>Compaction Process:</strong></p>
+                        <ol>
+                            <li>Relocate all live objects to one end of memory</li>
+                            <li>Update all references to moved objects</li>
+                            <li>Create a single large free block</li>
+                        </ol>
+                        
+                        <div class="code-block">
+                            // Before compaction:<br>
+                            [Object A][Free][Object B][Free][Object C][Free]<br>
+                            <br>
+                            // After compaction:<br>
+                            [Object A][Object B][Object C][Large Free Block]
+                        </div>
+                        
+                        <p><strong>Advantages of Compaction:</strong></p>
+                        <ul>
+                            <li>Reduces external fragmentation</li>
+                            <li>Improves memory utilization</li>
+                            <li>Enables larger allocations</li>
+                        </ul>
+                        
+                        <p><strong>Disadvantages:</strong></p>
+                        <ul>
+                            <li>Overhead of moving objects and updating references</li>
+                            <li>May cause performance issues during compaction</li>
+                        </ul>
+                        
+                        <p><strong>Real-world example:</strong> Java Virtual Machine (JVM) uses generational garbage collection with compaction.</p>
+                    `
                 },
                 {
                     question: "Implement a stack using a linked list with push and pop operations.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Stack Implementation using Linked List:</strong></p>
+                        
+                        <div class="code-block">
+                            // Node class<br>
+                            class StackNode {<br>
+                            &nbsp;&nbsp;int data;<br>
+                            &nbsp;&nbsp;StackNode next;<br>
+                            &nbsp;&nbsp;StackNode(int data) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.data = data;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.next = null;<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br>
+                            <br>
+                            // Stack class<br>
+                            class Stack {<br>
+                            &nbsp;&nbsp;private StackNode top;<br>
+                            <br>
+                            &nbsp;&nbsp;public Stack() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.top = null;<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;// Push operation<br>
+                            &nbsp;&nbsp;public void push(int data) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;StackNode newNode = new StackNode(data);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;newNode.next = top;  // New node points to current top<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;top = newNode;       // Update top to new node<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;System.out.println(data + " pushed to stack");<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;// Pop operation<br>
+                            &nbsp;&nbsp;public int pop() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;if (isEmpty()) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Stack Underflow");<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return -1;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;int popped = top.data;  // Store data to return<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;top = top.next;        // Move top to next node<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return popped;<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;// Peek operation<br>
+                            &nbsp;&nbsp;public int peek() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;if (isEmpty()) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Stack is empty");<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return -1;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return top.data;<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;// Check if stack is empty<br>
+                            &nbsp;&nbsp;public boolean isEmpty() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return top == null;<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <p><strong>Operations Explanation:</strong></p>
+                        <ul>
+                            <li><strong>Push:</strong> Add new node at the beginning (head) of the list</li>
+                            <li><strong>Pop:</strong> Remove node from the beginning (head) of the list</li>
+                            <li><strong>Peek:</strong> Return data from top node without removing</li>
+                            <li><strong>isEmpty:</strong> Check if top is null</li>
+                        </ul>
+                        
+                        <p><strong>Time Complexities:</strong></p>
+                        <ul>
+                            <li>Push: O(1)</li>
+                            <li>Pop: O(1)</li>
+                            <li>Peek: O(1)</li>
+                            <li>isEmpty: O(1)</li>
+                        </ul>
+                        
+                        <p><strong>Advantages over array implementation:</strong></p>
+                        <ul>
+                            <li>Dynamic size (no fixed capacity)</li>
+                            <li>No need to pre-allocate memory</li>
+                            <li>Efficient memory usage</li>
+                        </ul>
+                    `
                 }
             ],
             3: [
                 {
                     question: "Explain different tree traversal methods with examples.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Tree Traversal Methods:</strong></p>
+                        <p>Tree traversal means visiting all nodes in a tree in a specific order.</p>
+                        
+                        <p><strong>1. Depth-First Traversals:</strong></p>
+                        <ul>
+                            <li><strong>In-order (Left-Root-Right):</strong></li>
+                            <ul>
+                                <li>Traverse left subtree</li>
+                                <li>Visit root</li>
+                                <li>Traverse right subtree</li>
+                                <li><em>For BST: Returns nodes in sorted order</em></li>
+                            </ul>
+                            
+                            <li><strong>Pre-order (Root-Left-Right):</strong></li>
+                            <ul>
+                                <li>Visit root</li>
+                                <li>Traverse left subtree</li>
+                                <li>Traverse right subtree</li>
+                                <li><em>Used to create copy of tree</em></li>
+                            </ul>
+                            
+                            <li><strong>Post-order (Left-Right-Root):</strong></li>
+                            <ul>
+                                <li>Traverse left subtree</li>
+                                <li>Traverse right subtree</li>
+                                <li>Visit root</li>
+                                <li><em>Used to delete tree</em></li>
+                            </ul>
+                        </ul>
+                        
+                        <p><strong>2. Breadth-First Traversal (Level-order):</strong></p>
+                        <ul>
+                            <li>Visit nodes level by level</li>
+                            <li>Uses queue data structure</li>
+                            <li><em>Used to find shortest path</em></li>
+                        </ul>
+                        
+                        <p><strong>Example Tree:</strong></p>
+                        <div class="code-block">
+                            &nbsp;&nbsp;&nbsp;&nbsp;1<br>
+                            &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\\<br>
+                            &nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3<br>
+                            &nbsp;/&nbsp;\\&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;\\<br>
+                            4&nbsp;&nbsp;&nbsp;5&nbsp;6&nbsp;&nbsp;&nbsp;7
+                        </div>
+                        
+                        <p><strong>Traversal Results:</strong></p>
+                        <ul>
+                            <li><strong>In-order:</strong> 4, 2, 5, 1, 6, 3, 7</li>
+                            <li><strong>Pre-order:</strong> 1, 2, 4, 5, 3, 6, 7</li>
+                            <li><strong>Post-order:</strong> 4, 5, 2, 6, 7, 3, 1</li>
+                            <li><strong>Level-order:</strong> 1, 2, 3, 4, 5, 6, 7</li>
+                        </ul>
+                        
+                        <div class="code-block">
+                            // In-order traversal (Recursive)<br>
+                            void inOrder(Node root) {<br>
+                            &nbsp;&nbsp;if (root != null) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;inOrder(root.left);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;System.out.print(root.data + " ");<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;inOrder(root.right);<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <p><strong>Time Complexity:</strong> O(n) for all traversals</p>
+                        <p><strong>Space Complexity:</strong> O(h) for DFS, O(w) for BFS (where h = height, w = maximum width)</p>
+                    `
                 },
                 {
                     question: "Write an algorithm to insert a node in a Binary Search Tree.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>BST Insertion Algorithm:</strong></p>
+                        
+                        <div class="code-block">
+                            // Node structure<br>
+                            class TreeNode {<br>
+                            &nbsp;&nbsp;int data;<br>
+                            &nbsp;&nbsp;TreeNode left, right;<br>
+                            &nbsp;&nbsp;TreeNode(int value) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;data = value;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;left = right = null;<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br>
+                            <br>
+                            // Recursive insertion<br>
+                            TreeNode insert(TreeNode root, int value) {<br>
+                            &nbsp;&nbsp;// If tree is empty, create new node<br>
+                            &nbsp;&nbsp;if (root == null) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;root = new TreeNode(value);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return root;<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;// Otherwise, recur down the tree<br>
+                            &nbsp;&nbsp;if (value < root.data) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;root.left = insert(root.left, value);<br>
+                            &nbsp;&nbsp;} else if (value > root.data) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;root.right = insert(root.right, value);<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;// Return the unchanged root<br>
+                            &nbsp;&nbsp;return root;<br>
+                            }
+                        </div>
+                        
+                        <p><strong>Iterative Approach:</strong></p>
+                        <div class="code-block">
+                            TreeNode insertIterative(TreeNode root, int value) {<br>
+                            &nbsp;&nbsp;TreeNode newNode = new TreeNode(value);<br>
+                            &nbsp;&nbsp;if (root == null) return newNode;<br>
+                            <br>
+                            &nbsp;&nbsp;TreeNode current = root;<br>
+                            &nbsp;&nbsp;TreeNode parent = null;<br>
+                            <br>
+                            &nbsp;&nbsp;while (current != null) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;parent = current;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;if (value < current.data) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current = current.left;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;} else if (value > current.data) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current = current.right;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Value already exists<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return root;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;// Insert the new node<br>
+                            &nbsp;&nbsp;if (value < parent.data) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;parent.left = newNode;<br>
+                            &nbsp;&nbsp;} else {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;parent.right = newNode;<br>
+                            &nbsp;&nbsp;}<br>
+                            <br>
+                            &nbsp;&nbsp;return root;<br>
+                            }
+                        </div>
+                        
+                        <p><strong>Step-by-step Example:</strong></p>
+                        <p>Insert values: 50, 30, 70, 20, 40, 60, 80</p>
+                        <ol>
+                            <li>Insert 50: Root = 50</li>
+                            <li>Insert 30: 30 < 50 → Go left, insert as left child</li>
+                            <li>Insert 70: 70 > 50 → Go right, insert as right child</li>
+                            <li>Insert 20: 20 < 50 → Go left, 20 < 30 → Go left, insert as left child of 30</li>
+                            <li>Insert 40: 40 < 50 → Go left, 40 > 30 → Go right, insert as right child of 30</li>
+                            <li>Insert 60: 60 > 50 → Go right, 60 < 70 → Go left, insert as left child of 70</li>
+                            <li>Insert 80: 80 > 50 → Go right, 80 > 70 → Go right, insert as right child of 70</li>
+                        </ol>
+                        
+                        <p><strong>Final BST:</strong></p>
+                        <div class="code-block">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\\<br>
+                            &nbsp;&nbsp;&nbsp;30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;70<br>
+                            &nbsp;&nbsp;/&nbsp;&nbsp;\\&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;\\<br>
+                            &nbsp;20&nbsp;&nbsp;&nbsp;40&nbsp;60&nbsp;&nbsp;&nbsp;80
+                        </div>
+                        
+                        <p><strong>Time Complexity:</strong> O(h) where h is height of tree</p>
+                        <p><strong>Space Complexity:</strong> O(h) for recursive, O(1) for iterative</p>
+                    `
                 },
                 {
                     question: "Differentiate between binary trees and binary search trees.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Binary Tree vs Binary Search Tree:</strong></p>
+                        
+                        <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                            <tr style="background: #f8f9fa;">
+                                <th style="padding: 10px; border: 1px solid #ddd;">Aspect</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">Binary Tree</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">Binary Search Tree</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Definition</strong></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Tree with at most 2 children per node</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Binary tree with ordering property</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Ordering</strong></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">No specific ordering</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Left child < Parent < Right child</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Search Efficiency</strong></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">O(n) - Linear search</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">O(h) - Binary search (h = height)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Operations</strong></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Basic tree operations</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Search, Insert, Delete with ordering</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Use Cases</strong></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Expression trees, Huffman coding</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Dictionary, Database indexing</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;"><strong>In-order Traversal</strong></td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Random order</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">Sorted order</td>
+                            </tr>
+                        </table>
+                        
+                        <p><strong>Binary Tree Examples:</strong></p>
+                        <div class="code-block">
+                            // Valid Binary Tree (but not BST)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;10<br>
+                            &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\\<br>
+                            &nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15<br>
+                            &nbsp;/&nbsp;\\&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;\\<br>
+                            20&nbsp;&nbsp;&nbsp;3&nbsp;12&nbsp;&nbsp;&nbsp;8
+                        </div>
+                        <p><em>Note: 20 > 5 (violates BST property)</em></p>
+                        
+                        <p><strong>Binary Search Tree Examples:</strong></p>
+                        <div class="code-block">
+                            // Valid BST<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;10<br>
+                            &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\\<br>
+                            &nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15<br>
+                            &nbsp;/&nbsp;\\&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;\\<br>
+                            3&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;12&nbsp;&nbsp;&nbsp;18
+                        </div>
+                        <p><em>All left descendants < parent < all right descendants</em></p>
+                        
+                        <p><strong>Key Properties:</strong></p>
+                        <ul>
+                            <li><strong>Binary Tree:</strong> Hierarchical structure with max 2 children per node</li>
+                            <li><strong>BST:</strong> Binary tree + ordering property for efficient searching</li>
+                            <li>All BSTs are binary trees, but not all binary trees are BSTs</li>
+                        </ul>
+                        
+                        <p><strong>Verification:</strong> To check if a binary tree is BST, verify that for every node:</p>
+                        <ul>
+                            <li>All values in left subtree are less than node's value</li>
+                            <li>All values in right subtree are greater than node's value</li>
+                        </ul>
+                    `
                 },
                 {
                     question: "Explain Depth First Search algorithm for graphs.",
-                    marks: 3
+                    marks: 3,
+                    answer: `
+                        <p><strong>Depth First Search (DFS) Algorithm:</strong></p>
+                        <p>DFS is a graph traversal algorithm that explores as far as possible along each branch before backtracking.</p>
+                        
+                        <p><strong>Algorithm Steps:</strong></p>
+                        <ol>
+                            <li>Start from a source vertex</li>
+                            <li>Mark it as visited</li>
+                            <li>Recursively visit all adjacent unvisited vertices</li>
+                            <li>Backtrack when no more unvisited adjacent vertices</li>
+                        </ol>
+                        
+                        <div class="code-block">
+                            // DFS using adjacency list<br>
+                            void DFS(int v, boolean[] visited, List<List<Integer>> adj) {<br>
+                            &nbsp;&nbsp;// Mark current node as visited<br>
+                            &nbsp;&nbsp;visited[v] = true;<br>
+                            &nbsp;&nbsp;System.out.print(v + " ");<br>
+                            <br>
+                            &nbsp;&nbsp;// Recur for all adjacent vertices<br>
+                            &nbsp;&nbsp;for (int neighbor : adj.get(v)) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;if (!visited[neighbor]) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DFS(neighbor, visited, adj);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            }<br>
+                            <br>
+                            // Main DFS function<br>
+                            void DFSTraversal(List<List<Integer>> adj, int vertices) {<br>
+                            &nbsp;&nbsp;boolean[] visited = new boolean[vertices];<br>
+                            &nbsp;&nbsp;Arrays.fill(visited, false);<br>
+                            <br>
+                            &nbsp;&nbsp;for (int i = 0; i < vertices; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;if (!visited[i]) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DFS(i, visited, adj);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <p><strong>Iterative DFS using Stack:</strong></p>
+                        <div class="code-block">
+                            void DFSIterative(int start, List<List<Integer>> adj, int vertices) {<br>
+                            &nbsp;&nbsp;boolean[] visited = new boolean[vertices];<br>
+                            &nbsp;&nbsp;Stack<Integer> stack = new Stack<>();<br>
+                            <br>
+                            &nbsp;&nbsp;stack.push(start);<br>
+                            &nbsp;&nbsp;visited[start] = true;<br>
+                            <br>
+                            &nbsp;&nbsp;while (!stack.isEmpty()) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;int current = stack.pop();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;System.out.print(current + " ");<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// Push all unvisited neighbors<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;for (int neighbor : adj.get(current)) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!visited[neighbor]) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visited[neighbor] = true;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stack.push(neighbor);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                        
+                        <p><strong>Example Graph:</strong></p>
+                        <div class="code-block">
+                            0 --- 1<br>
+                            | \\&nbsp;&nbsp;&nbsp;|<br>
+                            |  \\ |<br>
+                            3 --- 2<br>
+                            &nbsp;\\&nbsp;&nbsp;&nbsp;/<br>
+                            &nbsp;&nbsp;\\&nbsp;/<br>
+                            &nbsp;&nbsp;&nbsp;4
+                        </div>
+                        
+                        <p><strong>DFS Traversal (starting from 0):</strong></p>
+                        <ul>
+                            <li>Recursive: 0 → 1 → 2 → 3 → 4</li>
+                            <li>Iterative: 0 → 2 → 3 → 4 → 1 (depends on push order)</li>
+                        </ul>
+                        
+                        <p><strong>Time Complexity:</strong> O(V + E) where V = vertices, E = edges</p>
+                        <p><strong>Space Complexity:</strong> O(V) for recursion stack/visited array</p>
+                        
+                        <p><strong>Applications of DFS:</strong></p>
+                        <ul>
+                            <li>Path finding between two nodes</li>
+                            <li>Topological sorting</li>
+                            <li>Detecting cycles in graph</li>
+                            <li>Solving puzzles and mazes</li>
+                            <li>Finding connected components</li>
+                        </ul>
+                        
+                        <p><strong>DFS vs BFS:</strong></p>
+                        <ul>
+                            <li><strong>DFS:</strong> Uses stack, goes deep first, uses less memory</li>
+                            <li><strong>BFS:</strong> Uses queue, goes level by level, finds shortest path</li>
+                        </ul>
+                    `
                 }
             ]
         };
@@ -1074,6 +1815,7 @@
         const moduleCards = document.querySelectorAll('.module-card');
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
+        const examQuestionsContainer = document.getElementById('exam-questions-container');
 
         // Event listeners for tabs
         tabs.forEach(tab => {
@@ -1095,6 +1837,7 @@
                 // Load content for specific tabs
                 if (tabId === 'questions') {
                     loadMCQQuestions('all');
+                    loadExamQuestions();
                 } else if (tabId === 'games') {
                     initializeGames();
                 }
@@ -1179,6 +1922,10 @@
                     <div class="exam-question">
                         <h4>Question ${index + 1} (${q.marks} marks)</h4>
                         <p>${q.question}</p>
+                        <button class="answer-btn" onclick="toggleAnswer(${moduleId}, ${index})">Show Answer</button>
+                        <div class="answer-content" id="answer-${moduleId}-${index}">
+                            ${q.answer}
+                        </div>
                     </div>
                 `;
             });
@@ -1355,6 +2102,47 @@
             }
             
             resultDiv.style.display = 'block';
+        }
+
+        // Function to load exam questions
+        function loadExamQuestions() {
+            examQuestionsContainer.innerHTML = '';
+            
+            for (const moduleId in examQuestions) {
+                const moduleQuestions = examQuestions[moduleId];
+                
+                const moduleHTML = `
+                    <div class="notes-section">
+                        <h3>Module ${moduleId} Questions</h3>
+                `;
+                
+                moduleQuestions.forEach((q, index) => {
+                    moduleHTML += `
+                        <div class="exam-question">
+                            <h4>Question ${index + 1} (${q.marks} marks)</h4>
+                            <p>${q.question}</p>
+                            <button class="answer-btn" onclick="toggleExamAnswer(${moduleId}, ${index})">Show Answer</button>
+                            <div class="answer-content" id="exam-answer-${moduleId}-${index}">
+                                ${q.answer}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                moduleHTML += `</div>`;
+                examQuestionsContainer.innerHTML += moduleHTML;
+            }
+        }
+
+        // Function to toggle answer visibility
+        function toggleAnswer(moduleId, questionIndex) {
+            const answerDiv = document.getElementById(`answer-${moduleId}-${questionIndex}`);
+            answerDiv.classList.toggle('show');
+        }
+
+        function toggleExamAnswer(moduleId, questionIndex) {
+            const answerDiv = document.getElementById(`exam-answer-${moduleId}-${questionIndex}`);
+            answerDiv.classList.toggle('show');
         }
 
         // Function to initialize games
@@ -1709,6 +2497,7 @@
         window.onload = function() {
             // Load all MCQ questions by default
             loadMCQQuestions('all');
+            loadExamQuestions();
         };
     </script>
 </body>
