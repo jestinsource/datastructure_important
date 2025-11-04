@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures Learning Game</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --accent: #e74c3c;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .module-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .module-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .module-card h3 span {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        .topic-list {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+        
+        .topic-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .topic-list li:before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .back-btn {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn:hover {
+            background: #1a252f;
+        }
+        
+        .concept {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .concept h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .visualization {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .quiz-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .options {
+            margin-top: 0.5rem;
+        }
+        
+        .option {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+        }
+        
+        .option.selected {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .submit-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            background: #27ae60;
+        }
+        
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--secondary);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .exam-questions {
+            margin-top: 2rem;
+        }
+        
+        .exam-question {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .exam-question h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .module-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Data Structures Learning Game</h1>
+        <p>Master data structures through interactive lessons and practice questions</p>
+    </header>
+    
+    <div class="container">
+        <div id="module-selection">
+            <h2>Select a Module to Learn</h2>
+            <div class="module-grid">
+                <div class="module-card" data-module="1">
+                    <h3><span>1</span> Basic Concepts of Data Structures</h3>
+                    <ul class="topic-list">
+                        <li>Data Abstraction</li>
+                        <li>Performance Analysis</li>
+                        <li>Arrays & Sparse Matrices</li>
+                        <li>Stacks & Queues</li>
+                        <li>Expression Evaluation</li>
+                    </ul>
+                </div>
+                
+                <div class="module-card" data-module="2">
+                    <h3><span>2</span> Linked List and Memory Management</h3>
+                    <ul class="topic-list">
+                        <li>Singly Linked Lists</li>
+                        <li>Doubly & Circular Linked Lists</li>
+                        <li>Stacks & Queues using Linked Lists</li>
+                        <li>Memory Allocation Schemes</li>
+                        <li>Garbage Collection</li>
+                    </ul>
+                </div>
+                
+                <div class="module-card" data-module="3">
+                    <h3><span>3</span> Trees and Graphs</h3>
+                    <ul class="topic-list">
+                        <li>Tree Representation</li>
+                        <li>Binary Trees & Traversals</li>
+                        <li>Binary Search Trees</li>
+                        <li>Binary Heaps & Priority Queues</li>
+                        <li>Graph Representation & DFS</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="module-content" class="content-section">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+    </div>
+    
+    <footer>
+        <p>Data Structures Learning Game &copy; 2023 | Based on PCCST303 Syllabus</p>
+    </footer>
+
+    <script>
+        // Module data
+        const modules = {
+            1: {
+                title: "Basic Concepts of Data Structures",
+                concepts: [
+                    {
+                        title: "Data Abstraction",
+                        content: "Data abstraction is the process of hiding the implementation details and showing only the functionality to the user. In data structures, this means defining ADTs (Abstract Data Types) that specify operations without revealing how they're implemented.",
+                        example: "Think of a car's steering wheel - you know how to use it to turn the car, but you don't need to know the mechanical details of how it works."
+                    },
+                    {
+                        title: "Performance Analysis",
+                        content: "Performance analysis involves evaluating the efficiency of algorithms in terms of time and space complexity. We use Big O notation to describe how an algorithm's runtime or memory usage grows as input size increases.",
+                        example: "O(1) - constant time, O(n) - linear time, O(n²) - quadratic time, O(log n) - logarithmic time"
+                    },
+                    {
+                        title: "Arrays and Sparse Matrices",
+                        content: "Arrays are collections of elements stored in contiguous memory locations. Sparse matrices are matrices where most elements are zero, and we can use special representations to save memory.",
+                        example: "A 1000x1000 matrix with only 50 non-zero elements would waste memory if stored as a regular 2D array."
+                    },
+                    {
+                        title: "Stacks and Queues",
+                        content: "Stacks follow LIFO (Last In First Out) principle, while Queues follow FIFO (First In First Out). Circular queues prevent wastage of space in array implementations.",
+                        example: "Stack: like a stack of plates. Queue: like a line at a ticket counter."
+                    },
+                    {
+                        title: "Expression Evaluation",
+                        content: "We can convert infix expressions (operator between operands) to postfix (operator after operands) for easier evaluation using stacks.",
+                        example: "Infix: A + B * C → Postfix: A B C * +"
+                    }
+                ],
+                quiz: [
+                    {
+                        question: "Which data structure follows the LIFO principle?",
+                        options: ["Queue", "Stack", "Linked List", "Tree"],
+                        answer: 1
+                    },
+                    {
+                        question: "What is the time complexity of accessing an element in an array by index?",
+                        options: ["O(1)", "O(n)", "O(log n)", "O(n²)"],
+                        answer: 0
+                    },
+                    {
+                        question: "Which notation places the operator after the operands?",
+                        options: ["Infix", "Prefix", "Postfix", "Circular"],
+                        answer: 2
+                    }
+                ]
+            },
+            2: {
+                title: "Linked List and Memory Management",
+                concepts: [
+                    {
+                        title: "Singly Linked Lists",
+                        content: "A singly linked list consists of nodes where each node contains data and a pointer to the next node. Operations include insertion, deletion, and traversal.",
+                        example: "Like a treasure hunt where each clue points to the location of the next clue."
+                    },
+                    {
+                        title: "Doubly and Circular Linked Lists",
+                        content: "Doubly linked lists have nodes with pointers to both next and previous nodes. Circular linked lists have the last node pointing back to the first node.",
+                        example: "A doubly linked list is like a two-way street, while a circular list is like a circular race track."
+                    },
+                    {
+                        title: "Stacks and Queues using Linked Lists",
+                        content: "We can implement stacks and queues using linked lists instead of arrays, which allows dynamic sizing.",
+                        example: "A stack using linked list: push adds a node at the head, pop removes from the head."
+                    },
+                    {
+                        title: "Memory Allocation Schemes",
+                        content: "First-fit allocates the first available block that's large enough. Best-fit finds the smallest adequate block. Worst-fit finds the largest adequate block.",
+                        example: "First-fit: like taking the first parking spot you find. Best-fit: like looking for the spot that fits your car perfectly."
+                    },
+                    {
+                        title: "Garbage Collection",
+                        content: "Garbage collection automatically reclaims memory that is no longer in use by the program, preventing memory leaks.",
+                        example: "Like a cleaning service that automatically removes trash from your house."
+                    }
+                ],
+                quiz: [
+                    {
+                        question: "Which linked list allows traversal in both directions?",
+                        options: ["Singly Linked List", "Doubly Linked List", "Circular Linked List", "Linear Linked List"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which memory allocation scheme finds the smallest adequate block?",
+                        options: ["First-fit", "Best-fit", "Worst-fit", "Next-fit"],
+                        answer: 1
+                    },
+                    {
+                        question: "In a linked list implementation of a stack, where does push operation add a new node?",
+                        options: ["At the tail", "At the head", "In the middle", "At a random position"],
+                        answer: 1
+                    }
+                ]
+            },
+            3: {
+                title: "Trees and Graphs",
+                concepts: [
+                    {
+                        title: "Tree Representation",
+                        content: "Trees are hierarchical data structures with a root node and child nodes. They can be represented using arrays or linked structures.",
+                        example: "Like a family tree or organizational chart."
+                    },
+                    {
+                        title: "Binary Trees and Traversals",
+                        content: "Binary trees have at most two children per node. Traversal methods include in-order, pre-order, and post-order.",
+                        example: "In-order traversal of a binary search tree gives elements in sorted order."
+                    },
+                    {
+                        title: "Binary Search Trees",
+                        content: "BSTs are binary trees where for each node, all left descendants are smaller and all right descendants are larger.",
+                        example: "Like a phone book where names are organized for quick lookup."
+                    },
+                    {
+                        title: "Binary Heaps and Priority Queues",
+                        content: "Binary heaps are complete binary trees that satisfy the heap property. They're used to implement priority queues.",
+                        example: "In a max-heap, the parent is always greater than or equal to its children."
+                    },
+                    {
+                        title: "Graph Representation and DFS",
+                        content: "Graphs can be represented using adjacency matrices or adjacency lists. Depth-First Search (DFS) explores as far as possible along each branch before backtracking.",
+                        example: "DFS is like exploring a maze by always taking the leftmost path until you hit a dead end."
+                    }
+                ],
+                quiz: [
+                    {
+                        question: "Which traversal visits root, left subtree, then right subtree?",
+                        options: ["In-order", "Pre-order", "Post-order", "Level-order"],
+                        answer: 1
+                    },
+                    {
+                        question: "In a Binary Search Tree, where would you find the smallest element?",
+                        options: ["Root", "Rightmost node", "Leftmost node", "Any leaf node"],
+                        answer: 2
+                    },
+                    {
+                        question: "Which graph traversal uses a stack?",
+                        options: ["BFS", "DFS", "Dijkstra", "Prim"],
+                        answer: 1
+                    }
+                ]
+            }
+        };
+
+        // Exam questions data
+        const examQuestions = {
+            1: [
+                {
+                    question: "Explain the concept of data abstraction with an example.",
+                    marks: 3
+                },
+                {
+                    question: "Compare and contrast arrays and linked lists.",
+                    marks: 3
+                },
+                {
+                    question: "Convert the infix expression (A + B) * C to postfix notation.",
+                    marks: 3
+                },
+                {
+                    question: "Explain time and space complexity with examples.",
+                    marks: 3
+                }
+            ],
+            2: [
+                {
+                    question: "Write an algorithm to reverse a singly linked list.",
+                    marks: 3
+                },
+                {
+                    question: "Differentiate between first-fit, best-fit, and worst-fit memory allocation schemes.",
+                    marks: 3
+                },
+                {
+                    question: "Explain garbage collection and compaction in memory management.",
+                    marks: 3
+                },
+                {
+                    question: "Implement a stack using a linked list with push and pop operations.",
+                    marks: 3
+                }
+            ],
+            3: [
+                {
+                    question: "Explain different tree traversal methods with examples.",
+                    marks: 3
+                },
+                {
+                    question: "Write an algorithm to insert a node in a Binary Search Tree.",
+                    marks: 3
+                },
+                {
+                    question: "Differentiate between binary trees and binary search trees.",
+                    marks: 3
+                },
+                {
+                    question: "Explain Depth First Search algorithm for graphs.",
+                    marks: 3
+                }
+            ]
+        };
+
+        // DOM elements
+        const moduleSelection = document.getElementById('module-selection');
+        const moduleContent = document.getElementById('module-content');
+        const moduleCards = document.querySelectorAll('.module-card');
+
+        // Event listeners for module selection
+        moduleCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const moduleId = card.getAttribute('data-module');
+                loadModuleContent(moduleId);
+            });
+        });
+
+        // Function to load module content
+        function loadModuleContent(moduleId) {
+            const module = modules[moduleId];
+            
+            let contentHTML = `
+                <button class="back-btn" onclick="showModuleSelection()">← Back to Modules</button>
+                <h2>Module ${moduleId}: ${module.title}</h2>
+                <div class="progress-bar">
+                    <div class="progress" id="progress-bar"></div>
+                </div>
+                
+                <div class="concepts-section">
+            `;
+            
+            // Add concepts
+            module.concepts.forEach((concept, index) => {
+                contentHTML += `
+                    <div class="concept">
+                        <h3>${concept.title}</h3>
+                        <p>${concept.content}</p>
+                        <div class="visualization">
+                            <strong>Example:</strong> ${concept.example}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            contentHTML += `</div>`;
+            
+            // Add quiz section
+            contentHTML += `
+                <div class="quiz-section">
+                    <h3>Test Your Knowledge</h3>
+                    <div id="quiz-container">
+            `;
+            
+            module.quiz.forEach((q, index) => {
+                contentHTML += `
+                    <div class="question">
+                        <p><strong>Q${index + 1}:</strong> ${q.question}</p>
+                        <div class="options" data-question="${index}">
+                `;
+                
+                q.options.forEach((option, optIndex) => {
+                    contentHTML += `
+                        <div class="option" data-option="${optIndex}">${option}</div>
+                    `;
+                });
+                
+                contentHTML += `</div></div>`;
+            });
+            
+            contentHTML += `
+                    <button class="submit-btn" onclick="checkQuiz(${moduleId})">Submit Answers</button>
+                    <div id="quiz-result" class="result"></div>
+                </div>
+            </div>
+            `;
+            
+            // Add exam questions section
+            contentHTML += `
+                <div class="exam-questions">
+                    <h3>Important Exam Questions</h3>
+            `;
+            
+            examQuestions[moduleId].forEach((q, index) => {
+                contentHTML += `
+                    <div class="exam-question">
+                        <h4>Question ${index + 1} (${q.marks} marks)</h4>
+                        <p>${q.question}</p>
+                    </div>
+                `;
+            });
+            
+            contentHTML += `</div>`;
+            
+            moduleContent.innerHTML = contentHTML;
+            moduleSelection.style.display = 'none';
+            moduleContent.classList.add('active');
+            
+            // Add event listeners to quiz options
+            setTimeout(() => {
+                const options = document.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.addEventListener('click', function() {
+                        const questionIndex = this.parentElement.getAttribute('data-question');
+                        const optionIndex = this.getAttribute('data-option');
+                        
+                        // Remove selected class from all options in this question
+                        const siblings = this.parentElement.querySelectorAll('.option');
+                        siblings.forEach(sibling => {
+                            sibling.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                    });
+                });
+            }, 100);
+        }
+
+        // Function to show module selection
+        function showModuleSelection() {
+            moduleContent.classList.remove('active');
+            moduleSelection.style.display = 'block';
+        }
+
+        // Function to check quiz answers
+        function checkQuiz(moduleId) {
+            const module = modules[moduleId];
+            const questions = document.querySelectorAll('.question');
+            let correctAnswers = 0;
+            
+            questions.forEach((question, index) => {
+                const selectedOption = question.querySelector('.option.selected');
+                if (selectedOption) {
+                    const selectedIndex = parseInt(selectedOption.getAttribute('data-option'));
+                    if (selectedIndex === module.quiz[index].answer) {
+                        correctAnswers++;
+                        selectedOption.style.backgroundColor = '#d4edda';
+                    } else {
+                        selectedOption.style.backgroundColor = '#f8d7da';
+                        // Highlight correct answer
+                        const correctOption = question.querySelector(`.option[data-option="${module.quiz[index].answer}"]`);
+                        correctOption.style.backgroundColor = '#d4edda';
+                    }
+                }
+            });
+            
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.textContent = `You got ${correctAnswers} out of ${module.quiz.length} correct!`;
+            resultDiv.className = 'result';
+            resultDiv.classList.add(correctAnswers === module.quiz.length ? 'correct' : 'incorrect');
+            resultDiv.style.display = 'block';
+            
+            // Update progress bar
+            const progress = (correctAnswers / module.quiz.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+        }
+    </script>
+</body>
+</html>
